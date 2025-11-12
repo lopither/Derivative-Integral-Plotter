@@ -1,0 +1,422 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     17889,        414]
+NotebookOptionsPosition[     17446,        397]
+NotebookOutlinePosition[     17930,        416]
+CellTagsIndexPosition[     17887,        413]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{"DynamicModule", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"f", "=", 
+      RowBox[{
+       RowBox[{"Sin", "[", "x", "]"}], "^", "2"}]}], ",", 
+     RowBox[{"nInput", "=", "\"\<1\>\""}], ",", 
+     RowBox[{"lastValidN", "=", "1"}], ",", 
+     RowBox[{"xrange", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "5"}], ",", "5"}], "}"}]}], ",", 
+     RowBox[{"yrange", "=", "Automatic"}], ",", 
+     RowBox[{"mode", "=", "\"\<Derivative\>\""}], ",", 
+     RowBox[{"useBounds", "=", "False"}], ",", 
+     RowBox[{"bounds", "=", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "Pi"}], "}"}]}]}], "}"}], ",", 
+   RowBox[{"Panel", "[", 
+    RowBox[{
+     RowBox[{"Column", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"(*", " ", 
+         RowBox[{"===", "Inputs", "==="}], "*)"}], 
+        RowBox[{
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{"\"\<f(x): \>\"", ",", "14", ",", "Bold"}], "]"}], ",", 
+            RowBox[{"Spacer", "[", "5", "]"}], ",", 
+            RowBox[{"InputField", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "f", "]"}], ",", "Expression", ",", 
+              RowBox[{"FieldSize", "->", 
+               RowBox[{"{", 
+                RowBox[{"40", ",", "1"}], "}"}]}]}], "]"}], ",", 
+            RowBox[{"Spacer", "[", "20", "]"}], ",", 
+            RowBox[{"Style", "[", 
+             RowBox[{"\"\<Mode: \>\"", ",", "14", ",", "Bold"}], "]"}], ",", 
+            RowBox[{"PopupMenu", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "mode", "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Derivative\>\"", ",", "\"\<Integral\>\""}], 
+               "}"}]}], "]"}], ",", 
+            RowBox[{"Spacer", "[", "20", "]"}], ",", 
+            RowBox[{"Dynamic", "[", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"mode", "===", "\"\<Derivative\>\""}], ",", 
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{"\"\<degree n: \>\"", ",", "14", ",", "Bold"}], 
+                   "]"}], ",", 
+                  RowBox[{"InputField", "[", 
+                   RowBox[{
+                    RowBox[{"Dynamic", "[", "nInput", "]"}], ",", "String", ",", 
+                    RowBox[{"FieldSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"6", ",", "1"}], "}"}]}]}], "]"}], ",", 
+                  RowBox[{"Button", "[", 
+                   RowBox[{"\"\<Apply\>\"", ",", 
+                    RowBox[{"With", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"parsed", "=", 
+                    RowBox[{"Quiet", "@", 
+                    RowBox[{
+                    RowBox[{"Interpreter", "[", "\"\<Integer\>\"", "]"}], "[",
+                     "nInput", "]"}]}]}], "}"}], ",", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"IntegerQ", "[", "parsed", "]"}], "&&", 
+                    RowBox[{"parsed", ">=", "0"}]}], ",", 
+                    RowBox[{"lastValidN", "=", "parsed"}]}], "]"}]}], "]"}]}],
+                    "]"}], ",", 
+                  RowBox[{"Spacer", "[", "20", "]"}]}], "}"}], "]"}], ",", 
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Checkbox", "[", 
+                   RowBox[{"Dynamic", "[", "useBounds", "]"}], "]"}], ",", 
+                  RowBox[{"Style", "[", 
+                   RowBox[{"\"\< Use bounds\>\"", ",", "14"}], "]"}], ",", 
+                  RowBox[{"Spacer", "[", "10", "]"}], ",", 
+                  RowBox[{"Style", "[", 
+                   RowBox[{"\"\<{a, b} = \>\"", ",", "14"}], "]"}], ",", 
+                  RowBox[{"InputField", "[", 
+                   RowBox[{
+                    RowBox[{"Dynamic", "[", "bounds", "]"}], ",", 
+                    "Expression", ",", 
+                    RowBox[{"FieldSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"12", ",", "1"}], "}"}]}]}], "]"}], ",", 
+                  RowBox[{"Spacer", "[", "20", "]"}]}], "}"}], "]"}]}], "]"}],
+              "]"}], ",", 
+            RowBox[{"Style", "[", 
+             RowBox[{"\"\<x-range: \>\"", ",", "14", ",", "Bold"}], "]"}], ",", 
+            RowBox[{"InputField", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "xrange", "]"}], ",", "Expression", ",", 
+              RowBox[{"FieldSize", "->", 
+               RowBox[{"{", 
+                RowBox[{"12", ",", "1"}], "}"}]}]}], "]"}], ",", 
+            RowBox[{"Spacer", "[", "20", "]"}], ",", 
+            RowBox[{"Style", "[", 
+             RowBox[{"\"\<y-range: \>\"", ",", "14", ",", "Bold"}], "]"}], ",", 
+            RowBox[{"InputField", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "yrange", "]"}], ",", "Expression", ",", 
+              RowBox[{"FieldSize", "->", 
+               RowBox[{"{", 
+                RowBox[{"12", ",", "1"}], "}"}]}]}], "]"}]}], "}"}], "]"}], ",", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"===", "Plot"}], "&"}], " ", "Output"}], "==="}], "*)"}], 
+         RowBox[{"Dynamic", "[", 
+          RowBox[{"Module", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"xr", ",", "yr", ",", "fx", ",", 
+              RowBox[{"gx", "=", "$Failed"}], ",", 
+              RowBox[{"label", "=", "\"\<\>\""}], ",", "plotExpr", ",", 
+              "legends", ",", "showResult"}], "}"}], ",", 
+            RowBox[{
+             RowBox[{"xr", "=", 
+              RowBox[{"Replace", "[", 
+               RowBox[{"xrange", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"a_", "?", "NumericQ"}], ",", 
+                    RowBox[{"b_", "?", "NumericQ"}]}], "}"}], ":>", 
+                   RowBox[{"{", 
+                    RowBox[{"a", ",", "b"}], "}"}]}], ",", 
+                  RowBox[{"_", ":>", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "5"}], ",", "5"}], "}"}]}]}], "}"}]}], 
+               "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"yr", "=", 
+              RowBox[{"Replace", "[", 
+               RowBox[{"yrange", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"a_", "?", "NumericQ"}], ",", 
+                    RowBox[{"b_", "?", "NumericQ"}]}], "}"}], ":>", 
+                   RowBox[{"{", 
+                    RowBox[{"a", ",", "b"}], "}"}]}], ",", 
+                  RowBox[{"Automatic", "->", "Automatic"}], ",", 
+                  RowBox[{"_", ":>", "Automatic"}]}], "}"}]}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"fx", "=", 
+              RowBox[{"f", "/.", " ", 
+               RowBox[{"x", "->", "x"}]}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+              "make", " ", "sure", " ", "x", " ", "is", " ", "interpreted", " ",
+                "as", " ", "variable"}], "*)"}], 
+             RowBox[{"plotExpr", "=", 
+              RowBox[{"{", "fx", "}"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"legends", "=", 
+              RowBox[{"{", "\"\<f(x)\>\"", "}"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"showResult", "=", "\"\<\>\""}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+              "will", " ", "contain", " ", "output", " ", "value", " ", "or", 
+               " ", "symbolic", " ", "form"}], "*)"}], 
+             RowBox[{"(*", " ", 
+              RowBox[{"===", 
+               RowBox[{"Derivative", " ", "Mode"}], "==="}], "*)"}], 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"mode", "===", "\"\<Derivative\>\""}], ",", 
+               RowBox[{
+                RowBox[{"gx", "=", 
+                 RowBox[{"Quiet", "@", 
+                  RowBox[{"Check", "[", 
+                   RowBox[{
+                    RowBox[{"FullSimplify", "[", 
+                    RowBox[{"D", "[", 
+                    RowBox[{"f", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", "lastValidN"}], "}"}]}], "]"}], "]"}], ",",
+                     "$Failed"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"gx", "=!=", "$Failed"}], ",", 
+                  RowBox[{
+                   RowBox[{"AppendTo", "[", 
+                    RowBox[{"plotExpr", ",", "gx"}], "]"}], ";", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"AppendTo", "[", 
+                    RowBox[{"legends", ",", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"lastValidN", ",", "\"\<-th derivative\>\""}], 
+                    "}"}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+                   RowBox[{"showResult", "=", 
+                    RowBox[{"TraditionalForm", "[", "gx", "]"}]}]}], ",", 
+                  RowBox[{
+                  "showResult", 
+                   "=", "\"\<\[LongDash] (cannot compute)\>\""}]}], "]"}], 
+                ";"}]}], "]"}], ";", "\[IndentingNewLine]", 
+             RowBox[{"(*", " ", 
+              RowBox[{"===", 
+               RowBox[{"Integral", " ", "Mode"}], "==="}], "*)"}], 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"mode", "===", "\"\<Integral\>\""}], ",", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"useBounds", "&&", 
+                   RowBox[{"MatchQ", "[", 
+                    RowBox[{"bounds", ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"a_", "?", "NumericQ"}], ",", 
+                    RowBox[{"b_", "?", "NumericQ"}]}], "}"}]}], "]"}]}], ",", 
+                  RowBox[{
+                   RowBox[{"gx", "=", 
+                    RowBox[{"Quiet", "@", 
+                    RowBox[{"Check", "[", 
+                    RowBox[{
+                    RowBox[{"NIntegrate", "[", 
+                    RowBox[{
+                    RowBox[{"Evaluate", "[", "fx", "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", 
+                    RowBox[{"bounds", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", 
+                    RowBox[{"bounds", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "}"}]}], "]"}], ",", 
+                    "$Failed"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+                   RowBox[{"showResult", "=", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"gx", "===", "$Failed"}], 
+                    ",", "\"\<\[LongDash] (cannot compute)\>\"", ",", "gx"}], 
+                    "]"}]}]}], ",", 
+                  RowBox[{
+                   RowBox[{"gx", "=", 
+                    RowBox[{"Quiet", "@", 
+                    RowBox[{"Check", "[", 
+                    RowBox[{
+                    RowBox[{"FullSimplify", "[", 
+                    RowBox[{"Integrate", "[", 
+                    RowBox[{"f", ",", "x"}], "]"}], "]"}], ",", "$Failed"}], 
+                    "]"}]}]}], ";", "\[IndentingNewLine]", 
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"gx", "=!=", "$Failed"}], ",", 
+                    RowBox[{
+                    RowBox[{"AppendTo", "[", 
+                    RowBox[{"plotExpr", ",", "gx"}], "]"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"AppendTo", "[", 
+                    RowBox[{"legends", ",", "\"\<\[Integral]f(x) dx\>\""}], 
+                    "]"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"showResult", "=", 
+                    RowBox[{"TraditionalForm", "[", "gx", "]"}]}]}], ",", 
+                    RowBox[{
+                    "showResult", 
+                    "=", "\"\<\[LongDash] (cannot compute)\>\""}]}], "]"}], 
+                   ";"}]}], "]"}], ";"}]}], "]"}], ";", "\[IndentingNewLine]", 
+             RowBox[{"(*", " ", 
+              RowBox[{"===", "Display", "==="}], "*)"}], 
+             RowBox[{"Column", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Show", "[", 
+                  RowBox[{"Plot", "[", 
+                   RowBox[{
+                    RowBox[{"Evaluate", "@", "plotExpr"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", 
+                    RowBox[{"xr", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", 
+                    RowBox[{"xr", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"PlotRange", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"xr", ",", "yr"}], "}"}]}], ",", 
+                    RowBox[{"PlotStyle", "->", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"Thick", ",", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"i", "==", "1"}], ",", "Solid", ",", "Dashed"}], 
+                    "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", 
+                    RowBox[{"Length", "[", "plotExpr", "]"}]}], "}"}]}], 
+                    "]"}]}], ",", 
+                    RowBox[{"PlotLegends", "->", 
+                    RowBox[{"Placed", "[", 
+                    RowBox[{"legends", ",", "Above"}], "]"}]}], ",", 
+                    RowBox[{"AxesLabel", "->", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<x\>\"", ",", "12"}], "]"}], ",", "None"}], 
+                    "}"}]}], ",", 
+                    RowBox[{"Frame", "->", "True"}], ",", 
+                    RowBox[{"ImageSize", "->", "700"}], ",", 
+                    RowBox[{"GridLines", "->", "Automatic"}]}], "]"}], "]"}], 
+                 ",", 
+                 RowBox[{"Grid", "[", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<f(x) =\>\"", ",", "14", ",", "Bold"}], "]"}],
+                     ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"TraditionalForm", "@", "fx"}], ",", "14"}], 
+                    "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"mode", "===", "\"\<Derivative\>\""}], ",", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"lastValidN", ",", "\"\<-th derivative =\>\""}], 
+                    "}"}], "]"}], ",", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    "useBounds", ",", "\"\<Definite Integral =\>\"", 
+                    ",", "\"\<Indefinite Integral =\>\""}], "]"}]}], "]"}], ",",
+                     "14", ",", "Bold"}], "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"showResult", ",", "14"}], "]"}]}], "}"}]}], 
+                    "}"}], ",", 
+                   RowBox[{"Alignment", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"Left", ",", "Baseline"}], "}"}]}], ",", 
+                   RowBox[{"Spacings", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"2", ",", "1"}], "}"}]}]}], "]"}]}], "}"}], ",", 
+               RowBox[{"Spacings", "->", "1.25"}]}], "]"}]}]}], "]"}], 
+          "]"}]}], "}"}], ",", 
+       RowBox[{"Spacings", "->", "1.25"}]}], "]"}], ",", 
+     RowBox[{"Style", "[", 
+      RowBox[{"\"\<Derivative & Integral Visualizer\>\"", ",", "15", ",", 
+       "Bold"}], "]"}], ",", 
+     RowBox[{"Appearance", "->", "\"\<Frameless\>\""}]}], "]"}]}], 
+  "]"}], "\n"}], "Input",
+ CellChangeTimes->{{3.9719549251366825`*^9, 3.9719549251366825`*^9}},
+ CellLabel->"In[26]:=",ExpressionUUID->"aad557a0-1cae-d847-87c5-f656344891b8"]
+},
+WindowSize->{1152, 585.6},
+WindowMargins->{{
+  Automatic, -5.399999999999864}, {-5.399999999999977, Automatic}},
+LightDark->"Dark",
+Magnification:>0.9 Inherited,
+FrontEndVersion->"14.3 for Microsoft Windows (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"47fec62f-9ccf-df40-bf27-595ec761445e"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 16888, 375, 668, "Input",ExpressionUUID->"aad557a0-1cae-d847-87c5-f656344891b8"]
+}
+]
+*)
+
